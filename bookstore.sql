@@ -176,11 +176,11 @@ INSERT INTO address_status (status_name) VALUES
 ('Shipping');
 -- Insert sample customers
 INSERT INTO customer (first_name, last_name, email, phone) VALUES
-('John', 'Doe', 'john.doe@example.com', '555-123-4567','hashed_password'),
-('Jane', 'Smith', 'jane.smith@example.com', '555-987-6543','hashed_password'),
-('Robert', 'Johnson', 'robert.j@example.com', '555-456-7890','hashed_password'),
-('Emily', 'Davis', 'emily.d@example.com', '555-789-0123','hashed_password'),
-('Michael', 'Wilson', 'michael.w@example.com', '555-234-5678','hashed_password');
+('John', 'Mwangi', 'johnmwa67@gmail.com', '+254-7123-456-78','hashed_password'),
+('Jane', 'Smith', 'janesmi67@gmail.com', '+254-7987-654-83','hashed_password'),
+('Robert', 'Aloo', 'robertalo47@gmail.com', '+254-7456-789-08','hashed_password'),
+('Emily', 'Jebitok', 'emilyjeb98@gmail.com', '+254-789-012-38','hashed_password'),
+('Michael', 'Onyango', 'michaelonya34@gmail.com', '+254-7234-567-98','hashed_password');
 -- Insert sample addresses
 INSERT INTO address (street_number, street_name, city, state_province, postal_code, country_id) VALUES
 ('123', 'Main St', 'New York', 'NY', '10001', 1),
@@ -261,3 +261,25 @@ JOIN customer c ON o.customer_id = c.customer_id
 JOIN order_history oh ON o.order_id = oh.order_id
 JOIN order_status os ON oh.status_id = os.status_id
 ORDER BY oh.status_date DESC;
+- Create admin user with full privileges
+CREATE USER 'bookstore_admin'@'localhost' IDENTIFIED BY 'secure_password';
+GRANT ALL PRIVILEGES ON bookstore_db.* TO 'bookstore_admin'@'localhost';
+
+-- Create manager user with limited privileges
+CREATE USER 'bookstore_manager'@'localhost' IDENTIFIED BY 'manager_pass';
+GRANT SELECT, INSERT, UPDATE, DELETE ON bookstore_db.* TO 'bookstore_manager'@'localhost';
+
+-- Create reports user with read-only access
+CREATE USER 'bookstore_reports'@'localhost' IDENTIFIED BY 'reports_pass';
+GRANT SELECT ON bookstore_db.* TO 'bookstore_reports'@'localhost';
+
+-- Create customer service user with limited access
+CREATE USER 'bookstore_service'@'localhost' IDENTIFIED BY 'service_pass';
+GRANT SELECT, INSERT, UPDATE ON bookstore_db.customer TO 'bookstore_service'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bookstore_db.address TO 'bookstore_service'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bookstore_db.customer_address TO 'bookstore_service'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bookstore_db.cust_order TO 'bookstore_service'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bookstore_db.order_line TO 'bookstore_service'@'localhost';
+GRANT SELECT ON bookstore_db.* TO 'bookstore_service'@'localhost';
+
+FLUSH PRIVILEGES;
