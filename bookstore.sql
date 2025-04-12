@@ -176,11 +176,11 @@ INSERT INTO address_status (status_name) VALUES
 ('Shipping');
 -- Insert sample customers
 INSERT INTO customer (first_name, last_name, email, phone) VALUES
-('John', 'Doe', 'john.doe@example.com', '555-123-4567'),
-('Jane', 'Smith', 'jane.smith@example.com', '555-987-6543'),
-('Robert', 'Johnson', 'robert.j@example.com', '555-456-7890'),
-('Emily', 'Davis', 'emily.d@example.com', '555-789-0123'),
-('Michael', 'Wilson', 'michael.w@example.com', '555-234-5678');
+('John', 'Doe', 'john.doe@example.com', '555-123-4567','hashed_password'),
+('Jane', 'Smith', 'jane.smith@example.com', '555-987-6543','hashed_password'),
+('Robert', 'Johnson', 'robert.j@example.com', '555-456-7890','hashed_password'),
+('Emily', 'Davis', 'emily.d@example.com', '555-789-0123','hashed_password'),
+('Michael', 'Wilson', 'michael.w@example.com', '555-234-5678','hashed_password');
 -- Insert sample addresses
 INSERT INTO address (street_number, street_name, city, state_province, postal_code, country_id) VALUES
 ('123', 'Main St', 'New York', 'NY', '10001', 1),
